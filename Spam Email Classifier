@@ -1,0 +1,27 @@
+2. Spam Email Classifier
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+
+emails = [
+    "Win free money now",
+    "Congratulations you won a prize",
+    "Claim your free offer",
+    "Meeting scheduled tomorrow",
+    "Project report submitted",
+    "Please send your assignment"
+]
+
+labels = ["spam", "spam", "spam", "not spam", "not spam", "not spam"]
+
+vectorizer = CountVectorizer()
+X = vectorizer.fit_transform(emails)
+
+model = MultinomialNB()
+model.fit(X, labels)
+
+test_email = [input("Enter email text: ")]
+test_data = vectorizer.transform(test_email)
+
+prediction = model.predict(test_data)
+
+print("Prediction:", prediction[0])
